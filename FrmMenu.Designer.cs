@@ -86,7 +86,7 @@
             // mnuSalir
             // 
             this.mnuSalir.Name = "mnuSalir";
-            this.mnuSalir.Size = new System.Drawing.Size(224, 26);
+            this.mnuSalir.Size = new System.Drawing.Size(179, 26);
             this.mnuSalir.Text = "Salir";
             this.mnuSalir.Click += new System.EventHandler(this.mnuSalir_Click);
             // 
@@ -116,33 +116,33 @@
             // mnuPadron
             // 
             this.mnuPadron.Name = "mnuPadron";
-            this.mnuPadron.Size = new System.Drawing.Size(224, 26);
+            this.mnuPadron.Size = new System.Drawing.Size(181, 26);
             this.mnuPadron.Text = "Padrón";
             // 
             // mnuDistrito
             // 
             this.mnuDistrito.Name = "mnuDistrito";
-            this.mnuDistrito.Size = new System.Drawing.Size(224, 26);
+            this.mnuDistrito.Size = new System.Drawing.Size(181, 26);
             this.mnuDistrito.Text = "Distrito";
             // 
             // mnuCandidatos
             // 
             this.mnuCandidatos.Name = "mnuCandidatos";
-            this.mnuCandidatos.Size = new System.Drawing.Size(224, 26);
+            this.mnuCandidatos.Size = new System.Drawing.Size(181, 26);
             this.mnuCandidatos.Text = "Candidatos";
             this.mnuCandidatos.Click += new System.EventHandler(this.mnuCandidatos_Click);
             // 
             // mnuPartidos
             // 
             this.mnuPartidos.Name = "mnuPartidos";
-            this.mnuPartidos.Size = new System.Drawing.Size(224, 26);
+            this.mnuPartidos.Size = new System.Drawing.Size(181, 26);
             this.mnuPartidos.Text = "Partidos";
             this.mnuPartidos.Click += new System.EventHandler(this.mnuPartidos_Click);
             // 
             // mnuTipoEleccion
             // 
             this.mnuTipoEleccion.Name = "mnuTipoEleccion";
-            this.mnuTipoEleccion.Size = new System.Drawing.Size(224, 26);
+            this.mnuTipoEleccion.Size = new System.Drawing.Size(181, 26);
             this.mnuTipoEleccion.Text = "Tipo Elección";
             // 
             // mnuVotacion
@@ -222,7 +222,7 @@
             // mnuCreditos
             // 
             this.mnuCreditos.Name = "mnuCreditos";
-            this.mnuCreditos.Size = new System.Drawing.Size(224, 26);
+            this.mnuCreditos.Size = new System.Drawing.Size(147, 26);
             this.mnuCreditos.Text = "Creditos";
             this.mnuCreditos.Click += new System.EventHandler(this.mnuCreditos_Click);
             // 
@@ -245,6 +245,7 @@
             this.Controls.Add(this.mnuAcerca);
             this.Name = "FrmMenu";
             this.Text = "FrmMenu";
+            this.Load += new System.EventHandler(this.FrmMenu_Load);
             this.mnuArchivo.ResumeLayout(false);
             this.mnuArchivo.PerformLayout();
             this.mnuMantenimientos.ResumeLayout(false);

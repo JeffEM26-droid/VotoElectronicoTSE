@@ -13,6 +13,29 @@ namespace VotoElectronicoTSE
 
     public partial class FrmMenu : Form
     {
+        public string PerfilUsuario { get; set; }
+
+        private void FrmMenu_Load(object sender, EventArgs e)
+        {
+            // RESTRICCIÓN DEL PDF: Configurar menú según el perfil
+            if (PerfilUsuario == "Votante")
+            {
+                // Ocultamos mantenimiento de datos y reportes para el votante
+                mnuCandidatos.Visible = false;
+                mnuPartidos.Visible = false;
+                estadisticaToolStripMenuItem.Visible = false;
+                reportesToolStripMenuItem.Visible = false;
+
+                MessageBox.Show("Sesión iniciada como Votante. Solo tiene acceso a la votación.");
+            }
+            else if (PerfilUsuario == "Administrador")
+            {
+                // El administrador gestiona, pero no vota en esta pantalla
+                votaciónToolStripMenuItem.Visible = false;
+
+                MessageBox.Show("Sesión iniciada como Administrador. Acceso total a catálogos y reportes.");
+            }
+        }
         public FrmMenu()
         {
             InitializeComponent();
