@@ -37,6 +37,7 @@ namespace VotoElectronicoTSE
                     SqlCommand cmd = new SqlCommand(sql, con);
                     SqlDataReader dr = cmd.ExecuteReader();
 
+
                     cmbProvincia.Items.Clear();
                     while (dr.Read())
                     {
