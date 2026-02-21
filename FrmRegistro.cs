@@ -174,15 +174,62 @@ namespace VotoElectronicoTSE
 
         private void btnGuardar_Click_1(object sender, EventArgs e)
         {
-            // Aquí haces las validaciones de contraseña que ya tenías
-            if (string.IsNullOrWhiteSpace(txtPassword.Text) || string.IsNullOrWhiteSpace(txtCorreo.Text))
+            // RESTRICCIÓN Validar longitud de contraseña (8 a 15 caracteres)
+            if (txtPassword.Text.Length < 8 || txtPassword.Text.Length > 15)
             {
-                MessageBox.Show("Debe completar el correo y la contraseña.");
+                MessageBox.Show("La contraseña debe tener entre 8 y 15 caracteres.");
                 return;
             }
 
-            MessageBox.Show("Usuario registrado correctamente en el sistema de votación.");
-            this.Close();
-        }
-    }
-}
+            // Validación de campos vacíos antes de enviar
+            if (string.IsNullOrWhiteSpace(txtCedula.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Cédula y Contraseña son obligatorios.");
+                return;
+            }
+
+            using (SqlConnection con = new SqlConnection(cadenaConexion))
+            {
+                try
+                {
+                    con.Open();
+
+                    // Query que incluye todas las columnas necesarias y encriptación HASHBYTES
+                    string sql = @"INSERT INTO Usuario (Cedula, Contrasena, Correo, Perfil, Nombre, PrimerApellido, SegundoApellido, Provincia, Canton, Distrito) 
+                           VALUES (@ced, HASHBYTES('SHA2_256', @pass), @correo, @perfil, @nom, @ap1, @ap2, @prov, @cant, @dist)";
+
+                    SqlCommand cmd = new SqlCommand(sql, con);
+
+                    // Parámetros con los nombres exactos
+                    cmd.Parameters.AddWithValue("@ced", txtCedula.Text);
+                    cmd.Parameters.AddWithValue("@pass", txtPassword.Text); // El SQL lo convierte a varbinary
+                    cmd.Parameters.AddWithValue("@correo", txtCorreo.Text);
+                    cmd.Parameters.AddWithValue("@perfil", "Votante"); // Perfil por defecto según el PDF
+                    cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
+                    cmd.Parameters.AddWithValue("@ap1", txtPrimerApellido.Text);
+                    cmd.Parameters.AddWithValue("@ap2", txtSegundoApellido.Text);
+                    cmd.Parameters.AddWithValue("@prov", cmbProvincia.SelectedItem?.ToString() ?? "");
+                    cmd.Parameters.AddWithValue("@cant", cmbCanton.SelectedItem?.ToString() ?? "");
+                    cmd.Parameters.AddWithValue("@dist", cmbDistrito.SelectedItem?.ToString() ?? "");
+
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("¡Usuario registrado con éxito! Ya puedes iniciar sesión.");
+                    this.Close(); // Cierra el registro para volver al Login
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al guardar en la base de datos: " + ex.Message);
+                }
+
+
+
+
+
+
+
+            }   
+    }   } 
+         
+}      
+
